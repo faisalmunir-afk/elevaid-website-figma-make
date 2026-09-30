@@ -1,0 +1,175 @@
+/* Fonts (the Next.js build loaded these with next/font) */
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@100..900&family=JetBrains+Mono:wght@400;500&family=Poppins:wght@400;500;600&display=swap");
+@import "tailwindcss";
+
+:root {
+  --font-exo2: "Exo 2", ui-sans-serif, system-ui, sans-serif;
+  --font-poppins: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-jetbrains-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-ink-900: #0b1220;
+  --color-ink-700: #29323f;
+  --color-ink-500: #475569;
+  --color-ink-400: #64748b;
+
+  --color-surface: #ffffff;
+  --color-surface-muted: #f7f9fc;
+  --color-surface-sunk: #eef2f7;
+
+  --color-border: #e2e8f0;
+  --color-border-strong: #cbd5e1;
+
+  --color-primary: #56afac;
+  --color-primary-dark: #41918e;
+  --color-primary-light: #edf7f7;
+
+  --color-accent: #6ad77e;
+  --color-accent-light: #eefbf1;
+
+  --color-good: #15803d;
+  --color-good-bg: #ecfdf3;
+  --color-good-border: #bbf7d0;
+
+  --color-warn: #b45309;
+  --color-warn-bg: #fffbeb;
+  --color-warn-border: #fde68a;
+
+  --color-bad: #b91c1c;
+  --color-bad-bg: #fef2f2;
+  --color-bad-border: #fecaca;
+
+  --color-neutral-bg: #f1f5f9;
+  --color-neutral-text: #334155;
+  --color-neutral-border: #e2e8f0;
+
+  --font-display: var(--font-exo2);
+  --font-body: var(--font-poppins);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+@theme inline {
+  --color-ink-900: var(--color-ink-900);
+  --color-ink-700: var(--color-ink-700);
+  --color-ink-500: var(--color-ink-500);
+  --color-ink-400: var(--color-ink-400);
+
+  --color-surface: var(--color-surface);
+  --color-surface-muted: var(--color-surface-muted);
+  --color-surface-sunk: var(--color-surface-sunk);
+
+  --color-border: var(--color-border);
+  --color-border-strong: var(--color-border-strong);
+
+  --color-primary: var(--color-primary);
+  --color-primary-dark: var(--color-primary-dark);
+  --color-primary-light: var(--color-primary-light);
+
+  --color-accent: var(--color-accent);
+  --color-accent-light: var(--color-accent-light);
+
+  --color-good: var(--color-good);
+  --color-good-bg: var(--color-good-bg);
+  --color-good-border: var(--color-good-border);
+
+  --color-warn: var(--color-warn);
+  --color-warn-bg: var(--color-warn-bg);
+  --color-warn-border: var(--color-warn-border);
+
+  --color-bad: var(--color-bad);
+  --color-bad-bg: var(--color-bad-bg);
+  --color-bad-border: var(--color-bad-border);
+
+  --color-neutral-bg: var(--color-neutral-bg);
+  --color-neutral-text: var(--color-neutral-text);
+  --color-neutral-border: var(--color-neutral-border);
+
+  /* Shared card elevation: resting and hover (brand-tinted lift). */
+  --shadow-card: 0 1px 2px rgba(11, 18, 32, 0.04), 0 18px 36px -24px rgba(11, 18, 32, 0.3);
+  --shadow-card-hover: 0 1px 2px rgba(11, 18, 32, 0.04), 0 28px 50px -24px rgba(86, 175, 172, 0.45);
+
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
+}
+
+body {
+  background: var(--color-surface);
+  color: var(--color-ink-900);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display), var(--font-body), ui-sans-serif, sans-serif;
+}
+
+::selection {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 32s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Brand gradient, from the logo mark (#2bdb75 → #21b3af). Pair with ink text: white fails contrast on it.
+   Twice as wide as the element (teal → green → teal) so hover can slide it: add hover:bg-brand-shift. */
+@utility bg-brand-gradient {
+  background-image: linear-gradient(90deg, #21b3af 0%, #2bdb75 50%, #21b3af 100%);
+  background-size: 200% 100%;
+  background-position: 0% 50%;
+}
+
+@utility bg-brand-shift {
+  background-position: 100% 50%;
+}
+
+/* Brand gradient on key words: the logo gradient (#2bdb75 → #21b3af). Use sparingly, one phrase per
+   section, on large bold text only (the logo colours are light on white). Keep each phrase in ONE element,
+   and let wrapped lines share one continuous gradient. */
+@utility brand-text-gradient {
+  background-image: linear-gradient(90deg, #2bdb75 0%, #21b3af 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Page shell (the Next.js layout set these on <html> and <body>) */
+html {
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100%;
+}
